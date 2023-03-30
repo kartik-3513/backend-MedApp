@@ -1,7 +1,7 @@
 # get predictions needs to be a separate function as it just needs to get the
 # predictions
 from flask import Flask, request, jsonify
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 from diagnoser import Train_Diagnosis
 from predictor import Predictions
 import pickle
@@ -13,17 +13,19 @@ import numpy as np
 # build 1 end point
 app = Flask(__name__)
 CORS(app)
-
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 # got the models
 
 # parameter 1 ->
 # processes the query given by the site and make prediction
 @app.route("/", methods=["GET"])
+@cross_origin()
 def ping_server():
     return 'Working!'
 
 @app.route("/process", methods=["GET", "POST"])
+@cross_origin()
 def get_diagnosis():
     def load_from_pickle(file):
         loaded = pickle.load(open(file, "rb"))
