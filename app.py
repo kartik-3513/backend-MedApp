@@ -19,7 +19,9 @@ CORS(app)
 
 # parameter 1 ->
 # processes the query given by the site and make prediction
-
+@app.route("/", methods=["GET"])
+def ping_server():
+    return 'Working!'
 
 @app.route("/process", methods=["GET", "POST"])
 def get_diagnosis():
@@ -75,4 +77,4 @@ def get_diagnosis():
 
 
 if __name__ == "__main__":
-    app.run(port=5000, debug=True)
+    app.run(port=5000, debug=False)
