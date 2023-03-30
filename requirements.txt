@@ -9,3 +9,4 @@ gunicorn
 joblib
 jsonschema
 requests-file
+scipy
